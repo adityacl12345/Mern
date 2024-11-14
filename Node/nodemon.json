@@ -1,0 +1,8 @@
+{
+    "env": {
+        "DB_USER": "adityaghosh1991",
+        "DB_PASSWORD": "AQxQqstMpp7Xd3nm",
+        "DB_NAME": "places",
+        "JWT_KEY": "super_secret_key"
+    }
+}
