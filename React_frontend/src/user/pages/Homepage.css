@@ -1,0 +1,29 @@
+section {
+    max-width: 1920px;
+    left: 0;
+    right: 0;
+    margin: 0 1rem;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+section.About {
+    display: flex;
+}
+
+section.About .image-content {
+    width: 40%;
+    height: 400px;
+    margin-left: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background: url('https://betterposter.de/cdn/shop/files/poster-reiseposter-isle-of-skye.jpg') no-repeat top/cover;
+}
+
+@media screen and (min-width: 1920px) {
+    section {
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}

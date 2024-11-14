@@ -71,7 +71,6 @@ const PlaceItem = props => {
                         <h2>{props.title}</h2>
                         <h3>{props.address}</h3>
                         <p>{props.desc}</p>
-                        <span>{props.creatorId}</span>
                     </div>
                     <div className="place-item__actions">
                         <Button inverse onClick={openMap}>View on Map</Button>

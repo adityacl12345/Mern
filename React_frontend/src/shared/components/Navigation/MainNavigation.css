@@ -17,13 +17,18 @@
   background: white;
 }
 
-.main-navigation__title {
-  color: white;
+.main-navigation__logo {
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
-.main-navigation__title a {
+.main-navigation__logo a {
+  display: block;
   text-decoration: none;
-  color: white;
+}
+
+.main-navigation__logo img {
+  width: 100%;
 }
 
 .main-navigation__header-nav {
