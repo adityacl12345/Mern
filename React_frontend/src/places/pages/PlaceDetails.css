@@ -8,3 +8,16 @@
     margin: 0 auto;
     width: auto;
 }
+.comments-list .comment-header {
+    display: flex;
+}
+.comments-list .comment-header .avatar{
+    width: 5%;
+}
+.comments-list .comment-header .user-details{
+    width: 95%;
+    margin-left: 1rem;
+}
+.comments-list .comment-section {
+    margin: 1rem 0;
+}

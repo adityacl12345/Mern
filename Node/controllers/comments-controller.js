@@ -21,12 +21,11 @@ const getCommentsByPlaceId = async (req, res, next) => {
 const createComment = async (req, res, next) => {
     const { placeId, userId, text } = req.body;
 
-    console.log(req.body);
-
-    let user, userName;
+    let user, userName, userImg;
     try {
         user = await User.findById(userId);
         userName = user.name;
+        userImg = user.image;
     } catch(err) {
         return next(err);
     }
@@ -35,6 +34,7 @@ const createComment = async (req, res, next) => {
         placeId,
         userId,
         userName,
+        userImg,
         text
     });    
     try {

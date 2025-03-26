@@ -104,9 +104,21 @@ const PlaceDetails = () => {
                     <hr/>
                     <div className="comments-list">
                         {comments.map((comment) => (
-                        <div key={comment._id}>
-                            <strong>{comment.userName}</strong>: {comment.text}
-                        </div>
+                            <div>
+                                <div key={comment._id} className="comment-header">
+                                    <div className="avatar">
+                                        <img src={`${process.env.REACT_APP_ASSETS_URL}/${comment.userImg}`} alt={comment.userName}></img>
+                                    </div>
+                                    <div className="user-details">
+                                        <strong>{comment.userName}</strong>
+                                        <br></br>
+                                        <i>{comment.createdAt}</i>
+                                    </div>
+                                </div>
+                                <div className="comment-section">
+                                    {comment.text}
+                                </div>
+                            </div>
                         ))}
                     </div>
                     {auth.isLoggedIn && <div className="comment-section">
