@@ -3,11 +3,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
+const cors = require("cors");
 
 const HttpError = require('./models/http-error');
 
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
+const commentsRoutes = require('./routes/comments-routes');
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
     next();
 });
+
+app.use('/api/comments', commentsRoutes);
 
 app.use('/api/places', placesRoutes);
 

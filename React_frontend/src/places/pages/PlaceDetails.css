@@ -1,0 +1,10 @@
+.place-details-container {
+    max-width: 65rem;
+    margin: 1rem auto;
+    padding: 10px;
+}
+.place-details-main img {
+    height: 400px;
+    margin: 0 auto;
+    width: auto;
+}
