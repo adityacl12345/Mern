@@ -19,6 +19,10 @@ main {
   margin: auto;
 }
 
+.flex {
+  display: flex;
+}
+
 .slide-in-left-enter {
   transform: translateX(-100%);
 }

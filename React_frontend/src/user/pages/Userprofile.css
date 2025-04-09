@@ -1,0 +1,32 @@
+.user-profile-container {
+    width: 60%;
+    margin: 0 auto; 
+}
+.user-profile .avatar {
+    width: 30%;
+    margin-right: 2rem;
+}
+.user-profile .avatar img{
+    width: 200px;
+    height: 200px;
+}
+.user-profile .user-data {
+    padding: 1rem;
+}
+.user-places .place-card {
+    width: 30%;
+    margin: 1rem;
+    transition: all .2s ease-in-out;
+}
+.user-places .place-card:hover {
+    transform: scale(1.1);
+}
+.user-places .place-card .avatar {
+    height: 75%;
+}
+.user-places .place-card .avatar img {
+    border-radius: 0;
+}
+.user-places .place-card .place-data {
+    text-align: center;
+}

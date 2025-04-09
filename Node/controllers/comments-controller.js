@@ -50,49 +50,52 @@ const createComment = async (req, res, next) => {
     res.status(201).json({comment: createdComment});
 };
 
-// const deletePlace = async (req, res, next) => {
-//     const placeId = req.params.pid;
+const replyComment = async (req, res) => {
+    const { user, reply } = req.body;
+  
+    if (!user || !reply) {
+      return res.status(400).json({ error: "User and text are required for a reply." });
+    }
 
-//     // For dummy array
-//     /* if(!places.find(p => p.id === placeId)) {
-//         throw new HttpError('Could not find place with Id.', 404);
-//     }
-//     places = places.filter(p => p.id !== placeId); */
-//     //----------------
+    let userP, userName, userImg;
+    try {
+        userP = await User.findById(user);
+        userName = userP.name;
+        userImg = userP.image;
+    } catch(err) {
+        return next(err);
+    }
+  
+    try {
+      const comment = await Comment.findById(req.params.id);
+      if (!comment)
+        return res.status(404).json({ error: "Comment not found" }); 
+      comment.replies.push({ user, userName, userImg, reply });
+      await comment.save();
+  
+      res.status(201).json({ message: "Reply added", replies: comment.replies });
+    } catch (err) {
+      console.error("Error adding reply:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
-//     let place;
-//     try {
-//         place = await Place.findById(placeId).populate('creatorId');
-//     } catch(err) {
-//         const Error = new HttpError('Something went wrong! Could not find place by ID', 500);
-//         return next(Error);
-//     }
-
-//     if(!place) {
-//         return next(new HttpError('Could not find place with Id!', 404));
-//     }
-
-//     if(place.creatorId.id !== req.userData.userId) {
-//         return next(new HttpError('You are not allowed to change this!', 401));
-//     }
-
-//     try {
-//         const sess = await mongoose.startSession();
-//         sess.startTransaction();
-//         await place.deleteOne({ session: sess });
-//         place.creatorId.places.pull(place);
-//         await place.creatorId.save({ session: sess });
-//         await sess.commitTransaction();
-//     } catch(err) {
-//         const Error = new HttpError('Something went wrong! Could not delete Place', 500);
-//         console.log(err);
-//         return next(Error);
-//     }
-
-//     res.status(200).json({ "message": "PLace Deleted" });
-// };
+const deleteComment = async (req, res, next) => {
+    try {
+        const result = await Comment.findByIdAndDelete(req.params.id);
+    
+        if (!result) {
+          return res.status(404).json({ error: "Comment not found" });
+        }
+    
+        res.json({ message: "Comment deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting comment:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 exports.getCommentsByPlaceId = getCommentsByPlaceId;
 exports.createComment = createComment;
-
-//exports.deletePlace = deletePlace;
+exports.replyComment = replyComment;
+exports.deleteComment = deleteComment;

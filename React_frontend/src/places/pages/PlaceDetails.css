@@ -8,16 +8,31 @@
     margin: 0 auto;
     width: auto;
 }
-.comments-list .comment-header {
-    display: flex;
+
+.comments-list .avatar{
+    width: 50px;
 }
-.comments-list .comment-header .avatar{
-    width: 5%;
+.comments-list .avatar img{
+    height: 50px;
 }
-.comments-list .comment-header .user-details{
-    width: 95%;
+.comments-list .user-details{
+    width: calc(100% - 50px);
     margin-left: 1rem;
 }
-.comments-list .comment-section {
-    margin: 1rem 0;
+.comments-list .comment-actions button{
+    margin-right: 1rem;
+}
+
+.comments-list .reply-list{
+    margin-top: 1rem;
+    padding-left: calc(50px + 1rem);
+}
+.comments-list .reply-list li {
+    margin-bottom: 1rem;
+}
+.comments-list .reply-section {
+    margin-left: calc(50px + 1rem);
+}
+.comments-list .reply-section textarea{
+    width: 100%;
 }
