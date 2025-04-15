@@ -8,6 +8,11 @@
   background: white;
 }
 
+.card-default {
+  width: 70%;
+  max-width: 1200px;
+}
+
 .card.extra-pad {
   padding: 1rem;
 } 

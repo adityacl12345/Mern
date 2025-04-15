@@ -7,6 +7,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
+import Button from "../../shared/components/FormElements/Button";
 
 const Userprofile = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -46,10 +47,14 @@ const Userprofile = () => {
             {!isLoading && loadedUser && <div className="user-profile-container">
                 <Card>
                     <div className="user-profile flex">
-                        <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${loadedUser.image}`} alt={loadedUser.name} />
+                        <div className="user-picture">
+                            <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${loadedUser.image}`} alt={loadedUser.name} />
+                            <div className="overlay"></div>
+                        </div>
                         <div className="user-data">
                             <h2>{loadedUser.name}</h2>
                             <p><strong>Email:</strong> {loadedUser.email}</p>
+                            <Button to={`/user/${uid}/edit`}>EDIT PROFILE</Button>
                         </div>
                     </div>
                     <hr></hr>

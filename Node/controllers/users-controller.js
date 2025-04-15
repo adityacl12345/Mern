@@ -114,8 +114,45 @@ const logIn = async(req, res, next) => {
     res.json({ userId: identifiedUser.id, email: identifiedUser.email, token: token }).status(201);
 };
 
+const editProfile = async(req, res, next) => {
+  const error = validationResult(req);
+
+    if(!error.isEmpty()) {
+        return next(new HttpError('The inputs are invalid, please check your data', 422));
+    }
+    const { name, email } = req.body;
+    const uid = req.params.uid;
+
+    // For DUMMY place array
+    /* const updatedPlace = { ...places.find(p => p.id === placeId) }
+    const placeIndex = places.findIndex(p => p.id === placeId); */
+    // ----------------------
+
+    let user;
+    try {
+        user = await User.findById(uid);
+    } catch(err) {
+        const Error = new HttpError('Something went wrong! Could not find user by ID', 500);
+        return next(Error);
+    }
+
+    user.name = name;
+    user.email = email;
+    if (req.file) 
+      user.image = req.file.path;
+    
+    try {
+        await user.save();
+    } catch(err) {
+        return next(new HttpError('Something went wrong, could not be saved!', 500));
+    }
+
+    res.status(200).json({ updatedUser: user.toObject({getters: true})});
+};
+
 
 exports.getUsers = getUsers;
 exports.getUserById = getUserById;
 exports.logIn = logIn;
 exports.signUp = signUp;
+exports.editProfile = editProfile;
