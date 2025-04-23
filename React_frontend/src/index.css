@@ -10,13 +10,17 @@ html {
 
 body {
   margin: 0;
-  background: #4d4d4d;
+  background: url(../src/assets/8456327.jpg) repeat-y top/cover;
 }
 
 main {
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 150px auto;
+}
+
+h1, h2 {
+  text-transform: uppercase;
 }
 
 .flex {
@@ -49,4 +53,9 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@font-face {
+  font-family: partyFont;
+  src: url(assets/Party_Vibes.otf);
 }

@@ -6,9 +6,11 @@ import MainHeader from "./MainHeader";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "../UIElements/Backdrop";
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/CholBro_logo.png";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
+import Button from "../FormElements/Button";
+import Avatar from "../UIElements/Avatar";
 
 
 const MainNavigation = props => {
@@ -43,7 +45,7 @@ const MainNavigation = props => {
             {drawerIsOpen && <Backdrop onClick={closeDrawer}/>}
             <SideDrawer show={drawerIsOpen} onClick={closeDrawer}>
                 <nav className="main-navigation__drawer-nav">
-                    <NavLinks />
+                    <NavLinks userImg={userImg}/>
                 </nav>
             </SideDrawer>
             <MainHeader>
@@ -52,10 +54,18 @@ const MainNavigation = props => {
                     <span />
                     <span />
                 </button>
-                <div className="main-navigation__logo"><Link to='/'><img src={logo} alt="Logo" /></Link></div>
+                <div className="main-navigation__logo small-screen"><Link to='/'><img src={logo} alt="Logo" /></Link></div>
                 <nav className="main-navigation__header-nav">
-                    <NavLinks uImg={userImg}/>
+                    <NavLinks/>
                 </nav>
+                <div className="sign-out center">
+                {auth.isLoggedIn && (
+                    <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${userImg}`} alt="Image"/>
+                )}
+                {auth.isLoggedIn && (
+                    <Button text onClick={auth.logout}>LOG OUT</Button>
+                )}
+                </div>
             </MainHeader>
         </React.Fragment>
     );

@@ -48,12 +48,13 @@ const createPlace = async (req, res, next) => {
     } catch(err) {
         return next(err);
     }
+    const imageUrls = req.files.map(file => `/uploads/images/${file.filename}`);
     const createdPlace = new Place({
         title,
         desc,
         address,
         location: coords,
-        image: req.file.path,
+        images: imageUrls,
         creatorId: req.userData.userId
     });
 

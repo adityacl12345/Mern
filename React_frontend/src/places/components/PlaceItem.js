@@ -65,12 +65,12 @@ const PlaceItem = props => {
                 <Card className="place-item__content">
                     {isLoading && <div className="center"><LoadingSpinner /></div>}
                     <div className="place-item__image">
-                        <img src={`${process.env.REACT_APP_ASSETS_URL}/${props.image}`} alt={props.title}/>
+                        <img src={`${process.env.REACT_APP_ASSETS_URL}${props.image}`} alt={props.title}/>
                     </div>
                     <div className="place-item__info">
                         <h2>{props.title}</h2>
-                        <h3>{props.address}</h3>
-                        <p>{props.desc}</p>
+                        <h5>{props.address}</h5>
+                        <h3>{props.desc}</h3>
                     </div>
                     <div className="place-item__actions">
                         <Button inverse onClick={openMap}>View on Map</Button>

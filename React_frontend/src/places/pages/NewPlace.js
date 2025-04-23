@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -19,6 +19,7 @@ const NewPlace = () => {
   const auth = useContext(AuthContext);
   const history = useHistory();
   const {isLoading, error, sendRequest, clearError} = useHttpClient();
+  const [placeImages, setPlaceImages] = useState([]);
   const [formState, inputHandler] = useForm(
     {
       title: {
@@ -33,12 +34,14 @@ const NewPlace = () => {
         value: '',
         isValid: false
       },
-      image: {
-        value: null,
-        isValid: false
-      }
     }, false
   );
+
+  const handleImagesInput = (id, files, isValid) => {
+    if (isValid) {
+      setPlaceImages(files);
+    }
+  };
 
   const submitHandler = async event => {
     event.preventDefault();
@@ -46,7 +49,7 @@ const NewPlace = () => {
     formData.append('title', formState.inputs.title.value);
     formData.append('desc', formState.inputs.desc.value);
     formData.append('address', formState.inputs.address.value);
-    formData.append('image', formState.inputs.image.value);
+    placeImages.forEach(img => formData.append('images', img));
     console.log(formData);
     try {
       await sendRequest(process.env.REACT_APP_BACKEND_URL + '/places', 'POST', formData, {
@@ -88,7 +91,7 @@ const NewPlace = () => {
           errorText="Please enter a valid address."
           onInput={inputHandler}
         />
-        <ImageUpload id="image" onInput={inputHandler} />
+        <ImageUpload place multiple id="images" onInput={handleImagesInput} />
         <Button type="submit" disabled={!formState.isValid}>
           ADD PLACE
         </Button>

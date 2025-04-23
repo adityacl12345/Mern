@@ -1,44 +1,84 @@
 section {
-  max-width: 1920px;
   left: 0;
   right: 0;
   margin: 0 1rem;
   position: relative;
   margin-bottom: 20px;
+  max-width: 1600px;
 }
 section > div {
-  padding: 1rem;
+  padding: 1rem 0;
+}
+
+section h1 {
+  font-family: partyFont;
+  font-size: 40px;
+  text-align: center;
+  color: azure;
+}
+
+section.Head-gallery {
+  margin: -150px 0 60px;
+  max-width: 1920px;
+  width: auto;
+}
+section.About .main-content {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+section.About .main-content p {
+  color: azure;
+  width: 600px;
+  text-align: justify;
 }
 section.About .image-content {
-  max-width: 100%;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border: 1px solid black;
-  margin: 1rem;
-  border-radius: 20px;
-  background: url("https://betterposter.de/cdn/shop/files/poster-reiseposter-isle-of-skye.jpg")
-    no-repeat top/cover;
+  margin: 1rem 4rem;
+  background: url(../../assets/CholBro_black.png) no-repeat top/contain;
+}
+
+.caption {
+  font-family: partyFont;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  font-size: 40px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.5);
+  color: azure;
+}
+.caption .button {
+  font-size: 22px;
 }
 
 @media screen and (min-width: 992px) {
   section {
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
-
-  section.About {
-    display: flex;
-    align-items: center;
-  }
-
-  section.About div {
-    width: 50%;
-    padding: 1rem;
+  .Head-gallery .gallery-slider {
+    height: 75vh;
   }
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1320px) {
   section {
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+  }
+  .Head-gallery .gallery-slider {
+    height: 100vh;
   }
 }

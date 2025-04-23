@@ -3,10 +3,13 @@
     margin: 1rem auto;
     padding: 10px;
 }
-.place-details-main img {
+.place-details-main .slider-image-container img {
     height: 400px;
     margin: 0 auto;
     width: auto;
+}
+.place-details-container .gallery-slider {
+    background-color: rgba(0,0,0,0.3);
 }
 
 .comments-list .avatar{

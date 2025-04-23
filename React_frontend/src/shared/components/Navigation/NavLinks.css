@@ -21,17 +21,20 @@
 
 .nav-links a {
   border: 1px solid transparent;
-  color: #292929;
+  color: white;
   text-decoration: none;
   padding: 0.5rem;
+  font-weight: bolder;
+}
+
+.nav-links .main-navigation__logo a {
+  padding: 0;
 }
 
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-  background: #f8df00;
-  border-color: #292929;
-  color: #292929;
+  color: rgb(160, 117, 65);
 }
 
 @media (min-width: 768px) {
@@ -42,7 +45,9 @@
   .nav-links li {
     margin: 0 0.5rem;
   }
-
+  .nav-links li.small-screen {
+    display: none;
+  }
   .nav-links a {
     color: white;
     text-decoration: none;

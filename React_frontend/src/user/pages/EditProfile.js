@@ -88,7 +88,7 @@ const EditProfile = () => {
         <ErrorModal error={error} onClear={clearError} />
         <Card className="card-default">
         {!isLoading && loadedUser && <form className="user-form" onSubmit={updatesubmitHandler}>
-            <ImageUpload profUrl={`${process.env.REACT_APP_ASSETS_URL}/${loadedUser.image}`} center id="image" onInput={inputHandler} />
+            <ImageUpload user profUrl={`${process.env.REACT_APP_ASSETS_URL}/${loadedUser.image}`} center id="image" onInput={inputHandler} />
             <Input
                 id="name"
                 element="input"

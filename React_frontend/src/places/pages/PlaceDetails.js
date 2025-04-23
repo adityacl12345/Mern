@@ -11,6 +11,7 @@ import { VALIDATOR_MINLENGTH } from "../../shared/util/validators";
 import Card from "../../shared/components/UIElements/Card";
 
 import "./PlaceDetails.css";
+import GallerySlider from "../../shared/components/UIElements/GallerySlider";
 
 const PlaceDetails = () => {
     const auth = useContext(AuthContext);
@@ -144,8 +145,10 @@ const PlaceDetails = () => {
             {!isLoading && <div className="place-details-container">
                 <Card>
                     <div className="place-details-main">
-                        <h1>{placeDetails.title}</h1>
-                        <img src={`${process.env.REACT_APP_ASSETS_URL}/${placeDetails.image}`} alt={placeDetails.title} />
+                        <h1 className="center">{placeDetails.title}</h1>
+                        <div className="flex center">
+                            <GallerySlider thumb images={placeDetails.images}></GallerySlider>
+                        </div>
                         <p>{placeDetails.desc}</p>
                         {/* Add any other details */}
                     </div>

@@ -14,6 +14,10 @@ import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 import PlaceDetails from './places/pages/PlaceDetails';
 import Userprofile from './user/pages/Userprofile';
 import EditProfile from './user/pages/EditProfile';
+import Footer from './shared/components/Navigation/Footer';
+import Contact from './user/pages/Contact';
+import Privacy from './user/pages/Privacy';
+import Terms from './user/pages/Terms';
 
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
 const UserPlaces = React.lazy(() => import('./places/pages/UserPlaces'));
@@ -49,6 +53,15 @@ const App = () => {
         <Route path="/place/:pid" exact>
           <PlaceDetails />
         </Route>
+        <Route path="/contact" exact>
+          <Contact />
+        </Route>
+        <Route path="/privacy" exact>
+          <Privacy />
+        </Route>
+        <Route path="/terms" exact>
+          <Terms />
+        </Route>
         
         <Redirect to='/' />
       </Switch>
@@ -68,6 +81,15 @@ const App = () => {
         <Route path="/auth" exact>
           <Auth />
         </Route>
+        <Route path="/contact" exact>
+          <Contact />
+        </Route>
+        <Route path="/privacy" exact>
+          <Privacy />
+        </Route>
+        <Route path="/terms" exact>
+          <Terms />
+        </Route>
         <Redirect to="/auth"/>
       </Switch>
     );
@@ -85,6 +107,7 @@ const App = () => {
             {routes} 
           </Suspense>         
         </main>
+        <Footer />
       </Router>
     </AuthContext.Provider>
   );

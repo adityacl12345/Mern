@@ -4,22 +4,8 @@
 }
 .user-profile .user-picture {
     position: relative;
-    width: 30%;
-    margin-right: 2rem;
-}
-.user-profile .user-picture .overlay {
     width: 200px;
-    height: 200px;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    opacity: 0;
-    transition: .5s ease;
-}
-.user-profile .user-picture:hover .overlay {
-    opacity: 1;
+    margin-right: 2rem;
 }
 .user-profile .avatar img{
     width: 200px;
@@ -28,20 +14,32 @@
 .user-profile .user-data {
     padding: 1rem;
 }
+.user-places {
+    flex-wrap: wrap;
+    justify-content: center;
+}
 .user-places .place-card {
-    width: 30%;
-    margin: 1rem;
-    transition: all .2s ease-in-out;
+    width: 200px;
+    height: 270px;
+    margin: 20px;
+    transition: transform .2s ease-in-out;
+}
+.user-places .place-card a {
+    text-decoration: none;
+    color: black;
+    font-family: partyFont;
+    font-size: 18px;
 }
 .user-places .place-card:hover {
     transform: scale(1.1);
 }
 .user-places .place-card .avatar {
-    height: 75%;
+    height: 85%;
 }
 .user-places .place-card .avatar img {
     border-radius: 0;
 }
 .user-places .place-card .place-data {
     text-align: center;
+    margin-top: 10px;
 }

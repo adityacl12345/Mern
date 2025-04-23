@@ -58,15 +58,14 @@ const Userprofile = () => {
                         </div>
                     </div>
                     <hr></hr>
-                    <h3>Places Visited</h3>
+                    <h2 className="center">Places Visited</h2>
                     <div className="user-places flex">
                         {loadedPlaces?.map((place) => (
                         <Card key={place._id} className="place-card">
                             <Link to={`/place/${place._id}`}>
-                                <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${place.image}`} alt={place.title} />
+                                <Avatar image={`${process.env.REACT_APP_ASSETS_URL}${place.images[0]}`} alt={place.title} />
                                 <div className="place-data">
                                     <strong>{place.title}</strong>
-                                    <p>{place.desc}</p>
                                 </div>
                             </Link>
                         </Card>

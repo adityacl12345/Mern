@@ -1,6 +1,6 @@
 .main-navigation__menu-btn {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   background: transparent;
   border: none;
   display: flex;
@@ -8,23 +8,26 @@
   justify-content: space-around;
   margin-right: 2rem;
   cursor: pointer;
+  position: fixed;
+  left: 1rem;
 }
 
 .main-navigation__menu-btn span {
   display: block;
-  width: 3rem;
+  width: 2rem;
   height: 2.5px;
   background: white;
 }
 
 .main-navigation__logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 85px;
+  height: 85px;
 }
 
 .main-navigation__logo a {
   display: block;
   text-decoration: none;
+  padding: 0;
 }
 
 .main-navigation__logo img {
@@ -39,6 +42,17 @@
   height: 100%;
 }
 
+.main-header .sign-out {
+  position: fixed;
+  right: 1rem;
+  top: 2rem;
+  display: none;
+}
+.main-header .sign-out .avatar img{
+  width: 50px;
+  height: 50px;
+}
+
 @media (min-width: 768px) {
   .main-navigation__menu-btn {
     display: none;
@@ -46,5 +60,12 @@
 
   .main-navigation__header-nav {
     display: block;
+  }
+
+  .main-navigation__logo.small-screen {
+    display: none;
+  }
+  .main-header .sign-out {
+    display: flex;
   }
 }
