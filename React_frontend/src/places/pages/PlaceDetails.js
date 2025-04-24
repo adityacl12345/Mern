@@ -12,6 +12,7 @@ import Card from "../../shared/components/UIElements/Card";
 
 import "./PlaceDetails.css";
 import GallerySlider from "../../shared/components/UIElements/GallerySlider";
+import CommentItem from "../components/CommentItem";
 
 const PlaceDetails = () => {
     const auth = useContext(AuthContext);
@@ -19,8 +20,8 @@ const PlaceDetails = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [placeDetails, setPlaceDetails] = useState(null);
     const [comments, setComments] = useState([]);
+    const [openRep, setOpenRep] = useState(null);
     const [replyText, setReplyText] = useState({});
-    const [openReplyBox, setOpenReplyBox] = useState(null);
     const [formState, inputHandler] = useForm(
         {
           text: {
@@ -71,9 +72,6 @@ const PlaceDetails = () => {
         }
     }; */
 
-    const toggleReplyBox = (commentId) => {
-        setOpenReplyBox((prevId) => (prevId === commentId ? null : commentId));
-    };
     const handleSubmit = async event => {
         event.preventDefault();
         try {
@@ -127,11 +125,16 @@ const PlaceDetails = () => {
         
             if (!response.ok) throw new Error("Failed to delete comment");
         
-            // ✅ Remove the deleted comment from state
+            // Remove the deleted comment from state
             setComments((prevComments) => prevComments.filter((c) => c._id !== commentId));
         } catch (error) {
             console.error("Error deleting comment:", error);
         }
+    };
+
+    const handleRepBox = (openReplyBox) => {
+        setOpenRep(openReplyBox);
+        console.log(openReplyBox);
     };
 
     if (!placeDetails) {
@@ -156,24 +159,13 @@ const PlaceDetails = () => {
                     <div className="comments-list">
                         {comments.map((comment) => (
                             <div key={comment._id}>
-                                <div className="comment-header flex">
-                                    <div className="avatar">
-                                        <img src={`${process.env.REACT_APP_ASSETS_URL}/${comment.userImg}`} alt={comment.userName}></img>
-                                    </div>
-                                    <div className="user-details">
-                                        <strong>{comment.userName}</strong>&nbsp;&nbsp;
-                                        <small>{new Date(comment.createdAt).toLocaleString()}</small>
-                                        <br />
-                                        {comment.text}
-                                        <div className="comment-actions">
-                                            {auth.isLoggedIn && <Button size="small" text onClick={() => toggleReplyBox(comment._id)}>
-                                                {openReplyBox === comment._id ? "Cancel" : "Reply"}
-                                            </Button>}
-                                            {auth.isLoggedIn && auth.userId === comment.userId && <Button size="small" text onClick={() => handleDelete(comment._id)}>Delete</Button>}
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Show replies */}
+                                <CommentItem
+                                    key={comment._id}
+                                    comment={comment}
+                                    userId={auth.userId}
+                                    onDel={handleDelete}
+                                    onRep={handleRepBox}
+                                />
                                 <ul className="reply-list">
                                     {comment.replies?.map((r, i) => (
                                         <li key={i} className="flex">
@@ -190,7 +182,7 @@ const PlaceDetails = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                {auth.isLoggedIn && openReplyBox === comment._id && <div className="reply-section">
+                                {auth.isLoggedIn && openRep === comment._id && <div className="reply-section">
                                     <form className='reply-form'>
                                         <textarea
                                         type="text"
