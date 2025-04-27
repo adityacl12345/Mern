@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const Comment = require('../models/comment');
 const User = require('../models/user');
+const Place = require('../models/place');
 
 const getCommentsByPlaceId = async (req, res, next) => {
     const { pid } = req.params;
@@ -16,6 +17,46 @@ const getCommentsByPlaceId = async (req, res, next) => {
         return next(new HttpError('Could not Find a place with this user Id!', 404));
     }
     res.json({comments: placeComments.map(comment => comment.toObject({getters: true}))});
+};
+
+const getTopLikedComments = async (req, res) => {
+  try {
+    // Fetch all comments
+    const comments = await Comment.find().lean();
+
+    // Sort them by the number of likes (descending)
+    const sorted = comments
+      .sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0))
+      .slice(0, 5); // Get top 5
+
+    // Fetch additional user/place info for each comment
+    const testimonials = await Promise.all(
+      sorted.map(async (comment) => {
+        const user = await User.findById(comment.userId).lean();
+        const place = await Place.findById(comment.placeId).lean();
+
+        return {
+          id: comment._id,
+          text: comment.text,
+          likes: comment.likes.length,
+          user: {
+            name: user?.name || 'Anonymous',
+            image: user?.image || 'default.png',
+          },
+          place: {
+            id: place?._id,
+            name: place?.title || 'Unknown Place',
+            image: place?.images[0] || 'default-place.png',
+          },
+        };
+      })
+    );
+
+    res.json({ testimonials });
+  } catch (err) {
+    console.error('Error fetching top-liked comments:', err);
+    res.status(500).json({ message: 'Server error while fetching testimonials.' });
+  }
 };
 
 const createComment = async (req, res, next) => {
@@ -120,6 +161,7 @@ const deleteComment = async (req, res, next) => {
 };
 
 exports.getCommentsByPlaceId = getCommentsByPlaceId;
+exports.getTopLikedComments = getTopLikedComments;
 exports.createComment = createComment;
 exports.replyComment = replyComment;
 exports.likeComment = likeComment;

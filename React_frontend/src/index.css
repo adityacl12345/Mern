@@ -10,7 +10,8 @@ html {
 
 body {
   margin: 0;
-  background: url(../src/assets/8456327.jpg) repeat-y top/cover;
+  background: black url('../src/assets/background.jpg') repeat-y center top;
+  background-size: 1920px calc(100vh + 150px);
 }
 
 main {
@@ -25,6 +26,12 @@ h1, h2 {
 
 .flex {
   display: flex;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .slide-in-left-enter {

@@ -10,6 +10,7 @@
   cursor: pointer;
   position: fixed;
   left: 1rem;
+  top: 2rem;
 }
 
 .main-navigation__menu-btn span {

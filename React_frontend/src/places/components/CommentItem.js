@@ -10,7 +10,7 @@ const CommentItem = ({comment, userId, onDel, onRep}) => {
 
     useEffect(() => {
         onRep(openReplyBox);
-    }, [openReplyBox])
+    }, [onRep, openReplyBox]);
     
     const toggleReplyBox = (commentId) => {
         setOpenReplyBox((prevId) => (prevId === commentId ? null : commentId));
@@ -55,8 +55,9 @@ const CommentItem = ({comment, userId, onDel, onRep}) => {
                     </Button>}
                     {auth.isLoggedIn && auth.userId === comment.userId && <Button size="small" text onClick={() => onDel(comment._id)}>Delete</Button>}
                     {auth.isLoggedIn && <Button size="small" text onClick={() => toggleLike(comment._id)}>
-                        {likedByUser ? '❤️' : '🤍'}{likes}
+                        <span role="img" aria-label="like">{likedByUser ? '❤️' : '🤍'}{likes}</span>
                     </Button>}
+                    {!auth.isLoggedIn && <span role="img" aria-label="like">❤️ {likes}</span>}
                 </div>
             </div>
         </div>

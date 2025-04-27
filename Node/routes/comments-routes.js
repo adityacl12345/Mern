@@ -5,6 +5,8 @@ const router = express.Router();
 
 // Get comments for a place
 router.get('/place/:pid', commentsController.getCommentsByPlaceId);
+// Get Top liked 
+router.get('/top-liked', commentsController.getTopLikedComments);
 // Add a comment
 router.post('/', commentsController.createComment);
 // Add a reply

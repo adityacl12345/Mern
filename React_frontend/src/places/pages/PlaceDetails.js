@@ -31,6 +31,19 @@ const PlaceDetails = () => {
         }, false
     );
     useEffect(() => {
+        if (comments.length === 0) return;
+      
+        const hash = window.location.hash;
+        if (hash) {
+          const el = document.querySelector(hash);
+          if (el) {
+            setTimeout(() => {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }, 500); // slight delay to ensure element is mounted
+          }
+        }
+    }, [comments]);
+    useEffect(() => {
         const fetchPlaceDetails = async () => {
             try {
                 const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/places/${pid}`);
@@ -134,7 +147,6 @@ const PlaceDetails = () => {
 
     const handleRepBox = (openReplyBox) => {
         setOpenRep(openReplyBox);
-        console.log(openReplyBox);
     };
 
     if (!placeDetails) {
@@ -158,7 +170,7 @@ const PlaceDetails = () => {
                     <hr/>
                     <div className="comments-list">
                         {comments.map((comment) => (
-                            <div key={comment._id}>
+                            <div key={comment._id} id={`comment-${comment._id}`}>
                                 <CommentItem
                                     key={comment._id}
                                     comment={comment}

@@ -3,6 +3,9 @@
     margin: 1rem auto;
     padding: 10px;
 }
+.place-details-main .slider-image-container {
+    height: 50vh;
+}
 .place-details-main .slider-image-container img {
     height: 400px;
     margin: 0 auto;
@@ -10,6 +13,10 @@
 }
 .place-details-container .gallery-slider {
     background-color: rgba(0,0,0,0.3);
+}
+
+.place-details-container .gallery-slider .slider-button{
+    top: 36%;
 }
 
 .comments-list .avatar{

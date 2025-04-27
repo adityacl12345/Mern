@@ -25,10 +25,7 @@ const GallerySlider = props => {
 
   return (
     <div className={`gallery-slider ${thumb ? 'thumbnails' : ''}`}>
-      <button onClick={handlePrev} className="slider-button prev-button">
-        &#9664;
-      </button>
-
+      <div onClick={handlePrev} className="slider-button prev-button"></div>
       <div className="slider-image-container">
         {images.map((image, index) => (
           <img
@@ -39,9 +36,7 @@ const GallerySlider = props => {
           />
         ))}
       </div>
-      <button onClick={handleNext} className="slider-button next-button">
-        &#9654;
-      </button>
+      <div onClick={handleNext} className="slider-button next-button"></div>
 
       {dots &&<div className="slider-dots">
         {images.map((_, index) => (
