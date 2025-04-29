@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import imageCompression from 'browser-image-compression';
 
 import Button from './Button';
 
@@ -32,7 +33,7 @@ const ImageUpload = props => {
         });
     },[files]);
 
-    const pickedHandler = event => {
+    const pickedHandler = async (event) => {
         let selectedFiles = Array.from(event.target.files);
         let fileIsValid = selectedFiles.length > 0;
 
@@ -40,9 +41,28 @@ const ImageUpload = props => {
             selectedFiles = selectedFiles.slice(0,1);
         }
 
-        setFiles(selectedFiles);
-        setIsValid(fileIsValid);
-        props.onInput(props.id, props.multiple ? selectedFiles : selectedFiles[0], fileIsValid )
+        const options = {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 1024,
+            useWebWorker: true
+        };
+        try {
+            const compressedFiles = await Promise.all(
+                selectedFiles.map(file => imageCompression(file, options))
+            );
+    
+            setFiles(selectedFiles);
+            setIsValid(fileIsValid);
+            props.onInput(
+                props.id, 
+                props.multiple ? compressedFiles : compressedFiles[0], 
+                fileIsValid 
+            );
+        } catch (error) {
+            console.error('Image compression error:', error);
+            setIsValid(false);
+            props.onInput(props.id, null, false);
+        }   
     };
     const pickImgHandler = () => {
         filePickRef.current.click();
