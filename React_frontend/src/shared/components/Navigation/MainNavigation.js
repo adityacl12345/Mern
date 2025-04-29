@@ -9,8 +9,8 @@ import Backdrop from "../UIElements/Backdrop";
 import logo from "../../../assets/CholBro_logo.png";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
-import Button from "../FormElements/Button";
 import Avatar from "../UIElements/Avatar";
+import NavDropDown from "./NavDropDown";
 
 
 const MainNavigation = props => {
@@ -54,18 +54,19 @@ const MainNavigation = props => {
                     <span />
                     <span />
                 </button>
-                <div className="main-navigation__logo small-screen"><Link to='/'><img src={logo} alt="Logo" /></Link></div>
-                <nav className="main-navigation__header-nav">
-                    <NavLinks/>
-                </nav>
-                <div className="sign-out center">
-                {auth.isLoggedIn && (
-                    <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${userImg}`} alt="Image"/>
-                )}
-                {auth.isLoggedIn && (
-                    <Button text onClick={auth.logout}>LOG OUT</Button>
-                )}
+                <div className="main-navigation__logo small-screen">
+                    <Link to='/'><img src={logo} alt="Logo" />
+                    </Link>
                 </div>
+                <nav className="main-navigation__header-nav">
+                    <NavLinks userImg={userImg} />
+                </nav>
+                {auth.isLoggedIn && (
+                    <div className="main-navigation__user">
+                        <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${userImg}`} alt="Image"/>
+                        <NavDropDown userId={uid}></NavDropDown> 
+                    </div>
+                )}
             </MainHeader>
         </React.Fragment>
     );

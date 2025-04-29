@@ -11,6 +11,13 @@ const PlaceSchema = new Schema({
         lat: { type: Number, required: true},
         lng: { type: Number, required: true}
     },
+    ratings:  [
+        {
+          user: { type: String },
+          rating: { type: Number, default: 0 }
+        }
+    ],
+    averageRating: { type: Number, default: 0 },
     creatorId: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
 

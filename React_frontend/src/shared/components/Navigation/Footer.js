@@ -4,11 +4,8 @@ import insta from "../../../assets/insta.png"
 import meta from "../../../assets/meta.png";
 import github from "../../../assets/github.png";
 import "./Footer.css";
-import { AuthContext } from "../../context/auth-context";
 
 const Footer = () => {
-    const auth = useContext(AuthContext);
-    const uid = auth.userId;
     return (
         <footer className="footer">
         <div className="footer-top">
@@ -16,7 +13,7 @@ const Footer = () => {
             <h3>Explore</h3>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href={`/${uid}/places`}>Destinations</a></li>
+                <li><a href={`/places`}>Destinations</a></li>
                 <li><a href="/#About">About Us</a></li>
             </ul>
             </div>

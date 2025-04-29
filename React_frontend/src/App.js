@@ -18,6 +18,7 @@ import Footer from './shared/components/Navigation/Footer';
 import Contact from './user/pages/Contact';
 import Privacy from './user/pages/Privacy';
 import Terms from './user/pages/Terms';
+import AllPlaces from './places/pages/AllPlaces';
 
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
 const UserPlaces = React.lazy(() => import('./places/pages/UserPlaces'));
@@ -40,6 +41,9 @@ const App = () => {
         </Route>
         <Route path="/user/:uid/edit" exact>
           <EditProfile />
+        </Route>
+        <Route path="/places" exact>
+          <AllPlaces />
         </Route>
         <Route path="/:userId/places" exact>
           <UserPlaces />
@@ -71,6 +75,9 @@ const App = () => {
       <Switch>
         <Route path="/" exact>
           <Homepage />
+        </Route>
+        <Route path="/places" exact>
+          <AllPlaces />
         </Route>
         <Route path="/:userId/places" exact>
           <UserPlaces />

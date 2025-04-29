@@ -45,9 +45,7 @@
   .nav-links li {
     margin: 0 0.5rem;
   }
-  .nav-links li.small-screen {
-    display: none;
-  }
+  
   .nav-links a {
     color: white;
     text-decoration: none;

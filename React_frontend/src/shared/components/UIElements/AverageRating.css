@@ -1,0 +1,31 @@
+.average-star-display {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.star {
+    margin-right: 4px;
+}
+
+.full {
+    color: #ffc107;
+    /* Gold */
+}
+
+.half {
+    background: linear-gradient(90deg, #ffc107 50%, #e4e5e9 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.empty {
+    color: #e4e5e9;
+    /* Light Grey */
+}
+
+.rating-number {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    color: #555;
+}

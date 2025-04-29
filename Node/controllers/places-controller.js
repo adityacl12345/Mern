@@ -6,6 +6,20 @@ const Place = require('../models/place');
 const User = require('../models/user');
 const getCoordsForAddress = require('../util/location');
 
+const getPlaces = async (req, res, next) => {
+    let places;
+    try {
+        places = await Place.find();
+    } catch(err) {
+        const Error = new HttpError('Something went wrong!', 500);
+        return next(Error);
+    }
+    if(!places) {
+        return next(new HttpError('Could not Find a place with this place Id!', 404));
+    }
+    res.json({places: places.map(place => place.toObject({getters: true}))});
+};
+
 const getPlaceById = async (req, res, next) => {
     const placeId = req.params.pid;
     let place;
@@ -166,8 +180,39 @@ const deletePlace = async (req, res, next) => {
     res.status(200).json({ "message": "PLace Deleted" });
 };
 
+const ratePlace = async (req, res, next) => {
+    const placeId = req.params.pid;
+    const { userId, rating } = req.body;
+  
+    const place = await Place.findById(placeId);
+  
+    if (!place) {
+      return res.status(404).json({ message: 'Place not found.' });
+    }
+
+    console.log(userId, rating);
+  
+    const existingRating = place.ratings.find(r => r.user.toString() === userId);
+  
+    if (existingRating) {
+      existingRating.rating = rating;
+    } else {
+      place.ratings.push({ user: userId, rating });
+    }
+  
+    // Recalculate average rating
+    place.averageRating =
+      place.ratings.reduce((acc, cur) => acc + cur.rating, 0) / place.ratings.length;
+  
+    await place.save();
+  
+    res.status(200).json({ message: 'Rating updated!', averageRating: place.averageRating });
+};
+  
+exports.getPlaces = getPlaces;
 exports.getPlaceById = getPlaceById;
 exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
+exports.ratePlace = ratePlace;

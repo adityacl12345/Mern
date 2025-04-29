@@ -13,6 +13,8 @@ import Card from "../../shared/components/UIElements/Card";
 import "./PlaceDetails.css";
 import GallerySlider from "../../shared/components/UIElements/GallerySlider";
 import CommentItem from "../components/CommentItem";
+import StarSelector from "../../shared/components/UIElements/StarSelector";
+import AverageRating from "../../shared/components/UIElements/AverageRating";
 
 const PlaceDetails = () => {
     const auth = useContext(AuthContext);
@@ -22,6 +24,7 @@ const PlaceDetails = () => {
     const [comments, setComments] = useState([]);
     const [openRep, setOpenRep] = useState(null);
     const [replyText, setReplyText] = useState({});
+    const [rating, setRating] = useState(0);
     const [formState, inputHandler] = useForm(
         {
           text: {
@@ -69,22 +72,6 @@ const PlaceDetails = () => {
     }, [sendRequest, pid])
 
     // Function to add a new comment
-    /* const addComment = async (newComment) => {
-        try {
-            const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/comments', 'POST', JSON.stringify({
-                userId: auth.userId,
-                text: newComment,
-                createdAt: Date.now
-            }), {
-                Authorization: 'Bearer ' + auth.token
-            });
-            setComments([...comments, responseData.comment]);
-        } catch (error) {
-
-          console.error('Error adding comment:', error);
-        }
-    }; */
-
     const handleSubmit = async event => {
         event.preventDefault();
         try {
@@ -130,6 +117,44 @@ const PlaceDetails = () => {
         }
     };
 
+    const handleRatingSubmit = async (event) => {
+        event.preventDefault();
+
+        if (rating === 0) {
+            alert('Please select a rating before submitting!');
+            return;
+        }
+
+        console.log(auth.userId, pid, rating, auth.token);
+
+        try {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/places/${pid}/like`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + auth.token
+                },
+                body: JSON.stringify({
+                    userId: auth.userId,
+                    rating
+                }),
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                throw new Error(responseData.message || 'Failed to submit rating.');
+            }
+
+            alert('Thanks for your rating!');
+            setRating(0);
+
+        } catch (err) {
+            console.log(err);
+            alert('Something went wrong.', err);
+        }
+    };
+
     const handleDelete = async (commentId) => {
         try {
             const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/comments/${commentId}`, {
@@ -160,14 +185,19 @@ const PlaceDetails = () => {
             {!isLoading && <div className="place-details-container">
                 <Card>
                     <div className="place-details-main">
-                        <h1 className="center">{placeDetails.title}</h1>
                         <div className="flex center">
                             <GallerySlider thumb images={placeDetails.images}></GallerySlider>
                         </div>
+                        <h1>{placeDetails.title}</h1>
+                        <AverageRating averageRating={placeDetails.averageRating}></AverageRating>
                         <p>{placeDetails.desc}</p>
-                        {/* Add any other details */}
+                        <hr/>
+                        {auth.isLoggedIn && <form onSubmit={handleRatingSubmit}>
+                            <StarSelector onRatingChange={setRating} />
+                            <Button text type="submit">Submit</Button>
+                            <hr/>
+                        </form>}
                     </div>
-                    <hr/>
                     <div className="comments-list">
                         {comments.map((comment) => (
                             <div key={comment._id} id={`comment-${comment._id}`}>

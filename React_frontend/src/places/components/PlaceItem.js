@@ -9,6 +9,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import AverageRating from "../../shared/components/UIElements/AverageRating";
 
 const PlaceItem = props => {
     const auth = useContext(AuthContext);
@@ -70,7 +71,7 @@ const PlaceItem = props => {
                     <div className="place-item__info">
                         <h2>{props.title}</h2>
                         <h5>{props.address}</h5>
-                        <h3>{props.desc}</h3>
+                        <AverageRating averageRating={props.averageRating}></AverageRating>
                     </div>
                     <div className="place-item__actions">
                         <Button inverse onClick={openMap}>View on Map</Button>
