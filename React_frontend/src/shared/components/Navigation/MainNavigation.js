@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import './MainNavigation.css';
 import MainHeader from "./MainHeader";
@@ -11,14 +11,18 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Avatar from "../UIElements/Avatar";
 import NavDropDown from "./NavDropDown";
+import SearchBar from "../FormElements/SearchBar";
 
 
 const MainNavigation = props => {
     const auth = useContext(AuthContext);
     const uid = auth.userId;
-    const [drawerIsOpen, setDrawerOpen] = useState(false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
+    const [drawerIsOpen, setDrawerOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
     const [userImg, setUserImg] = useState(null);
+    const history = useHistory();
+    
     useEffect(() => {
         const fetchUserImg = async () => {
         try {
@@ -32,6 +36,18 @@ const MainNavigation = props => {
             fetchUserImg(); 
         }
     }, [sendRequest, setUserImg, uid]);
+
+    const handlePlaceSelect = (place) => {
+        history.push(`/place/${place.id}`);
+        setSearchOpen(false);
+    };
+    const handleOpenSearch = () => {
+        setSearchOpen(true);
+    };
+
+    const handleCloseSearch = () => {
+        setSearchOpen(false);
+    };
 
     const openDrawer = () => {
         setDrawerOpen(true);
@@ -61,6 +77,13 @@ const MainNavigation = props => {
                 <nav className="main-navigation__header-nav">
                     <NavLinks userImg={userImg} />
                 </nav>
+                {searchOpen && <SearchBar onSelect={handlePlaceSelect}></SearchBar>}
+                {!searchOpen && <span className="icon search-icon" onClick={handleOpenSearch}></span>}
+                {searchOpen && <span className="icon close-icon" onClick={handleCloseSearch}></span>}
+                {!auth.isLoggedIn && (<div className="main-navigation__user">
+                    <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/uploads/images/default.png`} alt="Image"/>
+                </div>
+                )}
                 {auth.isLoggedIn && (
                     <div className="main-navigation__user">
                         <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/${userImg}`} alt="Image"/>

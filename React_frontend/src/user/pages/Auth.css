@@ -1,16 +1,35 @@
-.authentication__header {
-  color: white;
-  text-align: center;
-}
-
 .authentication {
+  color: azure;
   width: 90%;
   max-width: 25rem;
   margin: 7rem auto;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(0, 0, 0);
+}
+
+.authentication__header {
   text-align: center;
 }
 
 .authentication .place-form {
   padding: 0;
   margin-bottom: 1rem;
+}
+.auth__remember-forgot {
+  color: azure;
+  font-weight: 500;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.auth__remember-forgot a {
+  color: azure;
+}
+.auth__btn {
+  width: 100%;
+}
+.auth__footer {
+  text-align: center;
 }

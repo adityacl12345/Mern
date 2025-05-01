@@ -20,6 +20,18 @@ const getPlaces = async (req, res, next) => {
     res.json({places: places.map(place => place.toObject({getters: true}))});
 };
 
+const searchPlaces = async (req, res, next) => {
+    const searchQuery = req.query.q;
+    try {
+        const places = await Place.find({
+            title: { $regex: searchQuery, $options: 'i' }
+        }).limit(5); // limit to 5 suggestions
+        res.json({ places: places.map(place => place.toObject({getters: true})) });
+    } catch (err) {
+        next(err);
+    }
+};
+
 const getPlaceById = async (req, res, next) => {
     const placeId = req.params.pid;
     let place;
@@ -210,6 +222,7 @@ const ratePlace = async (req, res, next) => {
 };
   
 exports.getPlaces = getPlaces;
+exports.searchPlaces = searchPlaces;
 exports.getPlaceById = getPlaceById;
 exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;

@@ -46,15 +46,33 @@
 .main-navigation__user {
   position: fixed;
   right: 1rem;
-  top: 2rem;
+  top: 2.5rem;
   display: flex;
   color: azure;
   align-items: center;
 }
 .main-navigation__user .avatar img{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   margin-right: 10px;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  right: 95px;
+  top: 2.5rem;
+  position: fixed;
+  border-radius: 5px;
+  border: 1px solid azure;
+}
+
+.search-icon {
+  background: white url('../../../assets/search.svg') no-repeat center center/20px;
+}
+
+.close-icon {
+  background: white url('../../../assets/cancel.svg') no-repeat center center/20px;
 }
 
 @media (min-width: 768px) {
@@ -72,4 +90,8 @@
   .main-header .sign-out {
     display: flex;
   }
+}
+
+@media (min-width: 1200px) {
+
 }

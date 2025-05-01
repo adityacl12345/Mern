@@ -1,0 +1,60 @@
+.search-bar {
+    position: fixed;
+    width: 250px;
+    top: 7.5rem;
+    transition: all 0.5s ease-in;
+}
+  
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    background: white url("../../../assets/search.svg") no-repeat;
+    background-position: 5px center; 
+    background-size: 20px 20px;
+    text-indent: 30px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    z-index: 100;
+    padding-left: 0;
+    border-radius: 10px;
+}
+
+.dropdown li {
+    padding: 8px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.dropdown li:hover {
+    background-color: rgb(160, 117, 65);
+    border-radius: 10px;
+}
+
+.dropdown li .search-item {
+    align-items: center;
+}
+
+.dropdown li .search-item .avatar{
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+.dropdown li .search-item h5 {
+    margin: 0;
+}
+@media (min-width: 1280px){
+    .search-bar {
+        right: 150px;
+        top: 2.5rem;
+    }
+}
+  

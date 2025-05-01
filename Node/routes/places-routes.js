@@ -9,6 +9,8 @@ const router = express.Router();
 
 router.get('/', placesController.getPlaces);
 
+router.get('/search', placesController.searchPlaces);
+
 router.get('/:pid', placesController.getPlaceById);
 
 router.get('/user/:uid', placesController.getPlacesByUserId)

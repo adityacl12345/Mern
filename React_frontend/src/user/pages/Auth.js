@@ -98,7 +98,7 @@ const Auth = () => {
             <ErrorModal error={error} onClear={clearError}></ErrorModal>
             <Card className="authentication">
                 {isLoading && <LoadingSpinner asOverlay></LoadingSpinner>}
-                <h2>Login Required</h2>
+                <h2 className="authentication__header">{isLogin ? "LOGIN" : "SIGNUP"}</h2>
                 <hr/>
                 <form className="place-form" onSubmit={submitHandler}>
                     {!isLogin && (
@@ -131,9 +131,17 @@ const Auth = () => {
                     errorText="Please enter a valid password (at least 8 characters)."
                     onInput={inputHandler}
                     />
-                    <Button type="submit" disabled={!formState.isValid}>{isLogin ? "LOGIN" : "SIGNUP"}</Button>
+                    {isLogin && <div class="auth__remember-forgot flex">
+                        <label><input type="checkbox"/>Remember me</label>
+                        <a href="#">Forgot Password?</a>
+                    </div>}
+                    {!isLogin && <div class="auth__remember-forgot flex">
+                        <label><input type="checkbox" />I agree to the terms & conditions</label>
+                    </div>}
+                    <Button type="submit" size="full" disabled={!formState.isValid}>{isLogin ? "LOGIN" : "SIGNUP"}</Button>
                 </form>
-                <Button inverse onClick={onSwitchHandler}>{isLogin ? "SIGNUP" : "LOGIN"}</Button>
+                {isLogin && <div className="auth__footer">Don't have an account yet? <Button onClick={onSwitchHandler}>SIGNUP</Button></div>}
+                {!isLogin && <div className="auth__footer">Already have an account? <Button onClick={onSwitchHandler}>LOGIN</Button></div>}
             </Card>
         </React.Fragment>
     );

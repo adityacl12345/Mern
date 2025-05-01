@@ -24,12 +24,10 @@
 
 .button--inverse {
   background: transparent;
-  color: rgb(255, 255, 255);;
 }
 
 .button--inverse:hover,
 .button--inverse:active {
-  color: white;
   background: rgb(160, 117, 65);;
 }
 
@@ -48,7 +46,6 @@
 .button:hover:disabled,
 .button:active:disabled {
   background: #ccc;
-  color: #979797;
   border-color: #ccc;
   cursor: not-allowed;
 }
@@ -62,9 +59,12 @@
   font-size: 1.5rem;
 }
 
+.button--full {
+  width: 100%;
+}
+
 .button--text {
   font-weight: bolder;
-  color: rgb(41, 41, 41);
   border: none;
   background: none;
   padding: 0;

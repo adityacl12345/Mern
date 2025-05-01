@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import insta from "../../assets/insta.png"
 import meta from "../../assets/meta.png";
 import github from "../../assets/github.png";
@@ -52,6 +51,7 @@ const Homepage = () => {
                         <div>Where did you go<br/>this summer?</div>
                         <Button to='/places/new'>ADD PLACE</Button>
                     </div>
+                    
                     <div className="scroll-indicator">
                         <span className="down-arrow"></span>
                     </div>
