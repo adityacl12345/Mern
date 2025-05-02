@@ -68,14 +68,14 @@ const Homepage = () => {
             </section>
             <section className="Users">
                 <div className="main-block" data-aos="fade-right">
-                    <div><h1>Users</h1></div>
-                    <User></User>
+                    <h1>Users</h1>
+                    <div className="main-content"><User></User></div>
                 </div>
             </section>
             <section className="testimonials">
                 <div className="main-block" data-aos="zoom-in">
                     <h1>What Our Travelers Say</h1>
-                    <div className="testimonial-grid">
+                    <div className="main-content testimonial-grid">
                         {testimonials.map((item) => (
                         <div key={item.id} className="testimonial-card">
                             <div className="place-image">

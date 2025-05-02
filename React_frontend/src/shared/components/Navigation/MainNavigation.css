@@ -47,7 +47,7 @@
   position: fixed;
   right: 1rem;
   top: 2.5rem;
-  display: flex;
+  display: none;
   color: azure;
   align-items: center;
 }
@@ -60,9 +60,10 @@
 .icon {
   width: 35px;
   height: 35px;
-  right: 95px;
+  right: 1rem;
   top: 2.5rem;
   position: fixed;
+  cursor: pointer;
   border-radius: 5px;
   border: 1px solid azure;
 }
@@ -87,8 +88,11 @@
   .main-navigation__logo.small-screen {
     display: none;
   }
-  .main-header .sign-out {
+  .main-navigation__user {
     display: flex;
+  }
+  .icon {
+    right: 95px;
   }
 }
 

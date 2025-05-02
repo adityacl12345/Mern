@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-image: linear-gradient(black 30%, transparent);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8) 40%, transparent);
   padding: 1rem;
   padding-bottom: 0;
   z-index: 999;

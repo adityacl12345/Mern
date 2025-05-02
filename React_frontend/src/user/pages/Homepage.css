@@ -11,7 +11,7 @@ section {
   transition: all 0.3s ease-in;
 }
 section .main-block {
-  padding: 1rem 0;
+  padding: 0;
   width: 100%;
   height: max-content;
   align-self: center;
@@ -20,6 +20,7 @@ section .main-block {
 section .main-content {
   justify-content: center;
   flex-wrap: wrap;
+  padding: 1rem;
 }
 
 section h1 {
@@ -162,6 +163,7 @@ section.community .social-icons img {
   height: 50px;
   margin: 1.5rem;
   filter: brightness(90%);
+  cursor: pointer;
 }
 
 @keyframes bounce {

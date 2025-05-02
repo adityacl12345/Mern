@@ -25,7 +25,7 @@ const NavDropDown = props => {
             <span
                 role="button"
                 aria-label="down-arrow"
-                onClick={() => setIsOpen((prev) => !prev)}
+                onMouseEnter={() => setIsOpen((prev) => !prev)}
             >{!isOpen ? '▼' : '▲'}</span>
             {isOpen && (
                 <ul className="nav-dropdown-menu">
