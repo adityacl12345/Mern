@@ -81,7 +81,7 @@ const MainNavigation = props => {
                 {!searchOpen && <span className="icon search-icon" onClick={handleOpenSearch}></span>}
                 {searchOpen && <span className="icon close-icon" onClick={handleCloseSearch}></span>}
                 {!auth.isLoggedIn && (<div className="main-navigation__user">
-                    <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/uploads/images/default.png`} alt="Image"/>
+                    <Avatar image={`${process.env.REACT_APP_ASSETS_URL}/uploads/images/Default.png`} alt="Image"/>
                 </div>
                 )}
                 {auth.isLoggedIn && (

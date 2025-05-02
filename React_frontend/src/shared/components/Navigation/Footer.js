@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import insta from "../../../assets/insta.png"
 import meta from "../../../assets/meta.png";
