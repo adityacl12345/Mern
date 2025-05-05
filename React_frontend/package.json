@@ -8,8 +8,9 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "5.3.4",
-    "react-scripts": "3.2.0",
-    "react-transition-group": "^4.4.5"
+    "react-scripts": "^5.0.1",
+    "react-transition-group": "^4.4.5",
+    "swiper": "^11.2.6"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
@@ -36,6 +37,7 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@types/react-router-dom": "^5.3.3",
-    "@types/react-transition-group": "^4.4.10"
+    "@types/react-transition-group": "^4.4.10",
+    "@types/swiper": "^6.0.0"
   }
 }

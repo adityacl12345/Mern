@@ -1,0 +1,31 @@
+.swiper {
+    width: 100%;
+    padding: 50px 10px;
+}
+  
+.swiper-slide {
+    background-position: center;
+    background-size: contain;
+    width: 300px;
+    height: 300px;
+}
+.swiper-slide img {
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.swiper-pagination-bullet {
+    background: #ffffff98;
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: #ffffff;
+    transform: scale(1.1);
+}
+
+@media screen and (min-width: 992px) {
+    .swiper {
+        width: 900px;
+        margin: 10px auto;
+    }
+}

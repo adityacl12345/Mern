@@ -2,18 +2,19 @@ import React from "react";
 
 import './UsersList.css';
 import UserItem from "./UserItem";
+import ItemCarousel from "../../shared/components/UIElements/ItemCarousel";
 
 const UserList = props => {
     if(props.items.length === 0) {
         return <h2>No users found!</h2>
     }
 
+    const userItems = props.items?.map(user => (
+        <UserItem key={user.id} user={user} />
+    ));
+
     return (
-        <ul className="users-list">
-            {props.items.map(user => (
-                <UserItem key={user.id} id={user.id} placeCount={user.places.length} name={user.name} image={user.image} />
-            ))}
-        </ul>
+        <ItemCarousel items={userItems} />
     );
 };
 

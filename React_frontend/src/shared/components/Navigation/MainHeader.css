@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-image: linear-gradient(rgba(0, 0, 0) 45%, transparent 100%);
+  background-image: linear-gradient(rgb(0,0,0) 30%, rgb(0,0,0,0.5) 60%, transparent 100%);
   backdrop-filter: blur(1px);
   padding: 1rem;
   padding-bottom: 0;

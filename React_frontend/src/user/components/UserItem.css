@@ -1,14 +1,12 @@
 .user-item {
-  margin: 1rem;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .user-item a {
   position: relative;
   text-decoration: none;
   padding: 10px;
-  border-radius: 50%;
   overflow: hidden;
 }
 
@@ -17,24 +15,21 @@
 }
 
 .user-item__image {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .user-item__info {
   opacity: 0;
   position: absolute;
-  width: 200px;
-  height: 100px;
-  border-bottom-left-radius: 100px;
-  border-bottom-right-radius: 100px;
-  overflow: hidden;
+  width: 300px;
+  height: 150px;
   transition: opacity 0.3s ease-in-out;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.8);
 }
 
-.user-item a:hover .user-item__info {
+.swiper-slide-active .user-item a:hover .user-item__info {
   opacity: 1;
 }
 

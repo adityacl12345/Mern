@@ -27,7 +27,7 @@ const GallerySlider = props => {
     <div className={`gallery-slider ${thumb ? 'thumbnails' : ''}`}>
       <div onClick={handlePrev} className="slider-button prev-button"></div>
       <div className="slider-image-container">
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <img
             key={index}
             src={props.ext ? image:`${process.env.REACT_APP_ASSETS_URL}${image}`}
