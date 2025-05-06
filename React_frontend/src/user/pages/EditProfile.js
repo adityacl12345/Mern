@@ -29,7 +29,11 @@ const EditProfile = () => {
         email: {
             value: '',
             isValid: false
-        }
+        },
+        bio: {
+          value: '',
+          isValid: false
+      }
     }, false);
 
     useEffect(() => {
@@ -49,6 +53,10 @@ const EditProfile = () => {
             email: {
                 value: responseData.user.email,
                 isValid: true
+            },
+            bio: {
+              value: responseData.user.bio,
+              isValid: false
             }
           }, true);
         } catch(err) {
@@ -65,6 +73,7 @@ const EditProfile = () => {
         formData.append('image', formState.inputs.image.value);
         formData.append('name', formState.inputs.name.value);
         formData.append('email', formState.inputs.email.value);
+        formData.append('bio', formState.inputs.bio.value);
         await sendRequest(process.env.REACT_APP_BACKEND_URL + `/users/${uid}`, 'PATCH', 
           formData
         );
@@ -108,6 +117,16 @@ const EditProfile = () => {
                 errorText="Please enter a valid email."
                 onInput={inputHandler}
                 initialValue={loadedUser.email}
+                initialisValid={true}
+            />
+            <Input
+                id="bio"
+                element="textarea"
+                label="About you"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a valid bio."
+                onInput={inputHandler}
+                initialValue={loadedUser.bio}
                 initialisValid={true}
             />
             <Button type="submit" disabled={!formState.isValid}>

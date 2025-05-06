@@ -56,6 +56,7 @@ const Userprofile = () => {
                         <div className="user-data">
                             <h2>{loadedUser.name}</h2>
                             <p><strong>Email:</strong> {loadedUser.email}</p>
+                            <p><strong>About:</strong> {loadedUser.bio}</p>
                             {auth.isLoggedIn && auth.userId === loadedUser.id && <Button to={`/user/${uid}/edit`}>EDIT PROFILE</Button>}
                         </div>
                     </div>

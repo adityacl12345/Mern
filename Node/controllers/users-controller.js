@@ -121,7 +121,7 @@ const editProfile = async(req, res, next) => {
     if(!error.isEmpty()) {
         return next(new HttpError('The inputs are invalid, please check your data', 422));
     }
-    const { name, email } = req.body;
+    const { name, email, bio } = req.body;
     const uid = req.params.uid;
 
     // For DUMMY place array
@@ -139,6 +139,7 @@ const editProfile = async(req, res, next) => {
 
     user.name = name;
     user.email = email;
+    user.bio = bio;
     if (req.file) 
       user.image = req.file.path;
     

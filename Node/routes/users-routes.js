@@ -14,6 +14,6 @@ router.post('/signup', fileUpload.single('image'), [ check('name').not().isEmpty
 
 router.post('/login', usersController.logIn);
 
-router.patch('/:uid', fileUpload.single('image'), [ check('name').not().isEmpty(), check('email').normalizeEmail().isEmail() ], usersController.editProfile);
+router.patch('/:uid', fileUpload.single('image'), [ check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('bio').not().isEmpty() ], usersController.editProfile);
 
 module.exports = router;
