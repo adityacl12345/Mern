@@ -9,7 +9,6 @@ import Button from "../../shared/components/FormElements/Button";
 import AOS from "aos";
 import '../../../node_modules/aos/dist/aos.css';
 import Card from "../../shared/components/UIElements/Card";
-import AverageRating from "../../shared/components/UIElements/AverageRating";
 
 const Homepage = () => {
     const [testimonials, setTestimonials] = useState([]);
@@ -18,10 +17,7 @@ const Homepage = () => {
         "https://images.pexels.com/photos/1169107/pexels-photo-1169107.jpeg",
         "https://images.pexels.com/photos/587063/pexels-photo-587063.jpeg",
         "https://images.pexels.com/photos/399192/pexels-photo-399192.jpeg",
-        "https://images.pexels.com/photos/927017/pexels-photo-927017.jpeg",
-        "https://images.pexels.com/photos/1010079/pexels-photo-1010079.jpeg",
-        "https://images.pexels.com/photos/1581021/pexels-photo-1581021.jpeg",
-        "https://images.pexels.com/photos/1581021/pexels-photo-1581021.jpeg"
+        "https://images.pexels.com/photos/927017/pexels-photo-927017.jpeg"
     ];
 
     useEffect(() => {
