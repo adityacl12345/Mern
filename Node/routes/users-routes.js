@@ -10,7 +10,7 @@ router.get('/', usersController.getUsers);
 
 router.get('/:uid', usersController.getUserById);
 
-router.post('/signup', fileUpload.single('image'), [ check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('password').isLength({min: 8}) ], usersController.signUp);
+router.post('/signup', fileUpload.single('image'), [ check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('password').isLength({min: 8}), check('bio').not().isEmpty()], usersController.signUp);
 
 router.post('/login', usersController.logIn);
 

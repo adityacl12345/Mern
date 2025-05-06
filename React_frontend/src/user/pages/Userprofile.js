@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import './Userprofile.css';
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -8,8 +8,10 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Userprofile = () => {
+    const auth = useContext(AuthContext);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedUser, setLoadedUser] = useState();
     const [loadedPlaces, setLoadedPlaces] = useState();
@@ -54,7 +56,7 @@ const Userprofile = () => {
                         <div className="user-data">
                             <h2>{loadedUser.name}</h2>
                             <p><strong>Email:</strong> {loadedUser.email}</p>
-                            <Button to={`/user/${uid}/edit`}>EDIT PROFILE</Button>
+                            {auth.isLoggedIn && auth.userId === loadedUser.id && <Button to={`/user/${uid}/edit`}>EDIT PROFILE</Button>}
                         </div>
                     </div>
                     <hr></hr>

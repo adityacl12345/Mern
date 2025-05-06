@@ -15,13 +15,12 @@ const ItemCarousel = ({ items }) => {
         centeredSlides={true}
         slidesPerView={'auto'}
         coverflowEffect={{
-            rotate: 60,
+            rotate: 50,
             stretch: 0,
-            depth: 80,
+            depth: 100,
             modifier: 1,
             slideShadows: true,
         }}
-        loop={true}
         pagination={{
             clickable: true,
         }}

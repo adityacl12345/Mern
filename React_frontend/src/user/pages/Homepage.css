@@ -155,7 +155,20 @@ blockquote {
   bottom: 10rem;
   animation: bounce 2s infinite;
   z-index: 10;
+}
 
+.scroll-indicator.left {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: url(../../assets/left-arrow.png) no-repeat center top/contain;
+  transform: rotate(90deg);
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  animation: bounce-left 2s infinite;
+  z-index: 10;
 }
 
 section.community .social-icons img {
@@ -172,6 +185,14 @@ section.community .social-icons img {
   }
   50% {
     transform: translateY(30px);
+  }
+}
+@keyframes bounce-left {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(30px);
   }
 }
 

@@ -8,6 +8,8 @@ import User from "./User";
 import Button from "../../shared/components/FormElements/Button";
 import AOS from "aos";
 import '../../../node_modules/aos/dist/aos.css';
+import Card from "../../shared/components/UIElements/Card";
+import AverageRating from "../../shared/components/UIElements/AverageRating";
 
 const Homepage = () => {
     const [testimonials, setTestimonials] = useState([]);
@@ -69,31 +71,39 @@ const Homepage = () => {
             <section className="Users">
                 <div className="main-block" data-aos="fade-right">
                     <h1>Users</h1>
-                    <div className="main-content"><User></User></div>
+                    <div className="main-content">
+                        <div className="scroll-indicator left"></div>
+                        <User></User>
+                    </div>
                 </div>
             </section>
             <section className="testimonials">
                 <div className="main-block" data-aos="zoom-in">
                     <h1>What Our Travelers Say</h1>
                     <div className="main-content testimonial-grid">
+                        {testimonials.length === 0 && <Card className="no-commnets-card">
+                                <div>
+                                    <h3>No comments yet! Would you like to start off and let people know about the place?</h3>
+                                </div>
+                            </Card>}
                         {testimonials.map((item) => (
-                        <div key={item.id} className="testimonial-card">
-                            <div className="place-image">
-                                <img src={`${process.env.REACT_APP_ASSETS_URL}${item.place.image}`} alt={item.place.name} />
+                            <div key={item.id} className="testimonial-card">
+                                <div className="place-image">
+                                    <img src={`${process.env.REACT_APP_ASSETS_URL}${item.place.image}`} alt={item.place.name} />
+                                </div>
+                                <h3>{item.place.name}</h3>
+                                <div className="user">
+                                    <img src={`${process.env.REACT_APP_ASSETS_URL}/${item.user.image}`} alt={item.user.name} />
+                                    <span>{item.user.name}</span>
+                                </div>
+                                <blockquote className="testimonial-comment">“{item.text}”</blockquote>
+                                <div className="testimonial-bottom flex center">
+                                    <span role="img" aria-label="like"> ❤️ {item.likes}</span>
+                                    <a className="read-more-btn" href={`/place/${item.place.id}#comment-${item.id}`}>
+                                        Read more
+                                    </a>
+                                </div>
                             </div>
-                            <h3>{item.place.name}</h3>
-                            <div className="user">
-                                <img src={`${process.env.REACT_APP_ASSETS_URL}/${item.user.image}`} alt={item.user.name} />
-                                <span>{item.user.name}</span>
-                            </div>
-                            <blockquote className="testimonial-comment">“{item.text}”</blockquote>
-                            <div className="testimonial-bottom flex center">
-                                <span role="img" aria-label="like"> ❤️ {item.likes}</span>
-                                <a className="read-more-btn" href={`/place/${item.place.id}#comment-${item.id}`}>
-                                    Read more
-                                </a>
-                            </div>
-                        </div>
                         ))}
                     </div>
                 </div>

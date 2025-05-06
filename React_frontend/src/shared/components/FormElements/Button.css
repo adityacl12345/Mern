@@ -3,9 +3,9 @@
   font-family: partyFont;
   letter-spacing: 2px;
   padding: 0.5rem 1.5rem;
-  border: 1px solid rgb(160, 117, 65);;
+  border: 1px solid rgb(160, 117, 65);
   border-radius: 4px;
-  background: rgb(160, 117, 65);;
+  background: rgb(160, 117, 65);
   color: black;
   cursor: pointer;
   text-decoration: none;
@@ -18,7 +18,7 @@
 
 .button:hover,
 .button:active {
-  background: rgba(160, 117, 65, 0.555);;
+  background: rgba(160, 117, 65, 0.555);
   border-color: rgb(160, 117, 65);
 }
 
@@ -28,7 +28,7 @@
 
 .button--inverse:hover,
 .button--inverse:active {
-  background: rgb(160, 117, 65);;
+  background: rgb(160, 117, 65);
 }
 
 .button--danger {

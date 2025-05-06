@@ -6,7 +6,7 @@ import './UserItem.css';
 const UserItem = props => {
     return (
         <li className="user-item">
-            <Link to={`/${props.user.id}/places`} className="user-item__content">
+            <Link to={`/user/${props.user.id}`} className="user-item__content">
                     <div className="user-item__image">
                         <img src={`${process.env.REACT_APP_ASSETS_URL}/${props.user.image}`} alt={props.user.name} />
                     </div>

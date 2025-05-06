@@ -42,7 +42,7 @@ const PlaceDetails = () => {
           if (el) {
             setTimeout(() => {
               el.scrollIntoView({ behavior: 'smooth' });
-            }, 500); // slight delay to ensure element is mounted
+            }, 1000); // slight delay to ensure element is mounted
           }
         }
     }, [comments]);

@@ -1,6 +1,7 @@
 .user-profile-container {
     width: 95%;
     margin: 0 auto; 
+    max-width: 1600px;
 }
 .user-profile {
     flex-direction: column;
@@ -38,7 +39,7 @@
     transform: scale(1.1);
 }
 .user-places .place-card .avatar {
-    height: 85%;
+    height: 200px;
 }
 .user-places .place-card .avatar img {
     border-radius: 0;

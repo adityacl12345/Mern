@@ -36,7 +36,8 @@ const Auth = () => {
             setFormData({ 
                 ...formState.inputs, 
                 name: undefined,
-                image: undefined
+                image: undefined,
+                bio: undefined
             },
             formState.inputs.email.isValid && formState.inputs.password.isValid);
         } else {
@@ -48,6 +49,10 @@ const Auth = () => {
                 },
                 image: {
                     value: null,
+                    isValid: false
+                },
+                bio: {
+                    value: '',
                     isValid: false
                 }
             }, false);
@@ -81,6 +86,7 @@ const Auth = () => {
                 formData.append('email', formState.inputs.email.value);
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
+                formData.append('bio', formState.inputs.bio.value);
                 const responseData = await sendRequest(
                     process.env.REACT_APP_BACKEND_URL + '/users/signup',
                     'POST',
@@ -133,8 +139,19 @@ const Auth = () => {
                     />
                     {isLogin && <div class="auth__remember-forgot flex">
                         <label><input type="checkbox"/>Remember me</label>
-                        <a href="#">Forgot Password?</a>
+                        <a href="#password">Forgot Password?</a>
                     </div>}
+                    {!isLogin && (
+                        <Input 
+                        id="bio" 
+                        element="textarea" 
+                        type="text" 
+                        label="Your Bio"
+                        validators={[VALIDATOR_REQUIRE()]}
+                        errorText="Please enter a valid Bio."
+                        onInput={inputHandler}
+                        />
+                    )}
                     {!isLogin && <div class="auth__remember-forgot flex">
                         <label><input type="checkbox" />I agree to the terms & conditions</label>
                     </div>}
