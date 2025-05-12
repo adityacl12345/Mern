@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import insta from "../../assets/insta.png"
 import meta from "../../assets/meta.png";
 import github from "../../assets/github.png";
@@ -8,10 +8,9 @@ import User from "./User";
 import Button from "../../shared/components/FormElements/Button";
 import AOS from "aos";
 import '../../../node_modules/aos/dist/aos.css';
-import Card from "../../shared/components/UIElements/Card";
+import TestimonialList from "../components/TestimonialList";
 
 const Homepage = () => {
-    const [testimonials, setTestimonials] = useState([]);
     const images = [
         "https://images.pexels.com/photos/1038935/pexels-photo-1038935.jpeg",
         "https://images.pexels.com/photos/1169107/pexels-photo-1169107.jpeg",
@@ -22,27 +21,15 @@ const Homepage = () => {
 
     useEffect(() => {
         AOS.init({
-          duration: 500 
+          duration: 1000 
         });
     }, []);
 
-    useEffect(() => {
-        const fetchTestimonials = async () => {
-          try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/comments/top-liked`);
-            const data = await response.json();
-            setTestimonials(data.testimonials);
-          } catch (err) {
-            console.error('Failed to load testimonials:', err);
-          }
-        };
     
-        fetchTestimonials();
-    }, []);
       
     return (
         <React.Fragment>
-            <section className="Head-gallery">
+            <section id="Hero"className="Head-gallery">
                 <div className="main-block">
                     <GallerySlider ext dots images={images}></GallerySlider>
                     <div className="caption">
@@ -58,13 +45,13 @@ const Homepage = () => {
             <section id="About" className="About">
                 <div className="main-block" data-aos="fade-left">
                     <h1>About us</h1>
-                    <div className="main-content flex">
+                    <article className="main-content flex">
                         <p>Welcome to CholBro – your gateway to unforgettable adventures and breathtaking escapes! We believe that travel is more than just a trip; it’s an opportunity to connect with the world, create lasting memories, and recharge your spirit. So "Chol Bro" let's create exceptional vacation experiences that cater to every traveler’s dream – whether you're seeking sun-soaked beaches, scenic mountain getaways, cultural city explorations, or off-the-beaten-path adventures. Our team of travel enthusiasts and experts works tirelessly to bring you the best of every destination. We’re passionate about finding hidden gems, offering personalized recommendations, and ensuring your journey is smooth from start to finish. From luxurious resorts and charming boutique stays to immersive tours and unique local experiences, we’re here to help you design your perfect getaway. Let us take care of the details so you can focus on what matters most – enjoying every moment. Discover, dream, and travel with CholBro. Your next adventure awaits!</p>
                         <div className="image-content"></div>
-                    </div>
+                    </article>
                 </div>
             </section>
-            <section className="Users">
+            <section id="Users"className="Users">
                 <div className="main-block" data-aos="fade-right">
                     <h1>Users</h1>
                     <div className="main-content">
@@ -73,38 +60,16 @@ const Homepage = () => {
                     </div>
                 </div>
             </section>
-            <section className="testimonials">
+            <section id="Testimonials" className="testimonials">
                 <div className="main-block" data-aos="zoom-in">
                     <h1>What Our Travelers Say</h1>
-                    <div className="main-content testimonial-grid">
-                        {testimonials.length === 0 && <Card className="no-commnets-card">
-                                <div>
-                                    <h3>No comments yet! Would you like to start off and let people know about the place?</h3>
-                                </div>
-                            </Card>}
-                        {testimonials.map((item) => (
-                            <div key={item.id} className="testimonial-card">
-                                <div className="place-image">
-                                    <img src={`${process.env.REACT_APP_ASSETS_URL}${item.place.image}`} alt={item.place.name} />
-                                </div>
-                                <h3>{item.place.name}</h3>
-                                <div className="user">
-                                    <img src={`${process.env.REACT_APP_ASSETS_URL}/${item.user.image}`} alt={item.user.name} />
-                                    <span>{item.user.name}</span>
-                                </div>
-                                <blockquote className="testimonial-comment">“{item.text}”</blockquote>
-                                <div className="testimonial-bottom flex center">
-                                    <span role="img" aria-label="like"> ❤️ {item.likes}</span>
-                                    <a className="read-more-btn" href={`/place/${item.place.id}#comment-${item.id}`}>
-                                        Read more
-                                    </a>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="main-content">
+                        <div className="scroll-indicator left"></div>
+                        <TestimonialList></TestimonialList>
                     </div>
                 </div>
             </section>
-            <section className="community">
+            <section id="Social" className="community">
                 <div className="main-block" data-aos="zoom-in">
                     <h1>Join Our Community</h1>
                     <div className="main-content flex-column-center">

@@ -11,7 +11,7 @@ html {
 body {
   margin: 0;
   background: black url('../src/assets/background.jpg') repeat-y center top;
-  background-size: 100%;
+  background-size: 1920px 1080px;
 }
 
 main {

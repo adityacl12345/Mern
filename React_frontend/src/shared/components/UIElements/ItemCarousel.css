@@ -6,8 +6,8 @@
 .swiper-slide {
     background-position: center;
     background-size: contain;
-    width: 300px;
-    height: 300px;
+    width: max-content;
+    height: max-content;
 }
 .swiper-slide img {
     display: block;

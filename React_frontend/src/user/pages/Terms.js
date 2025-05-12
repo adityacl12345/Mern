@@ -51,7 +51,6 @@ const Terms = () => {
 
                 If you have any questions about these Terms, please contact us at:
                 adityaghosh1991@gmail.com
-                cholbrogetaway@hashtag.com
             </div>
         </Card>
     )

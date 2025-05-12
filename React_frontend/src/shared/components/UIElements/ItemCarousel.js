@@ -24,6 +24,7 @@ const ItemCarousel = ({ items }) => {
         pagination={{
             clickable: true,
         }}
+        initialSlide={1}
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper"
     >
