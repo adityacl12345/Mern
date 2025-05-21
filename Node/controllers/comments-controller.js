@@ -27,7 +27,7 @@ const getTopLikedComments = async (req, res) => {
     // Sort them by the number of likes (descending)
     const sorted = comments
       .sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0))
-      .slice(0, 5); // Get top 5
+      .slice(0, 10); // Get top 10
 
     // Fetch additional user/place info for each comment
     const testimonials = await Promise.all(

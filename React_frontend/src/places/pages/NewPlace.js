@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -20,6 +20,10 @@ const NewPlace = () => {
   const history = useHistory();
   const {isLoading, error, sendRequest, clearError} = useHttpClient();
   const [placeImages, setPlaceImages] = useState([]);
+
+  const addressInputRef = useRef(null);
+  const autocompleteRef = useRef(null);
+
   const [formState, inputHandler] = useForm(
     {
       title: {
@@ -36,6 +40,23 @@ const NewPlace = () => {
       },
     }, false
   );
+
+  // Attach Google Autocomplete
+  useEffect(() => {
+    if (!window.google || !addressInputRef.current) return;
+
+    autocompleteRef.current = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+      types: ['geocode'],
+      componentRestrictions: { country: 'in' } // Change to your desired country code
+    });
+
+    autocompleteRef.current.addListener('place_changed', () => {
+      const place = autocompleteRef.current.getPlace();
+      if (place && place.formatted_address) {
+        inputHandler('address', place.formatted_address, true);
+      }
+    });
+  }, [inputHandler]);
 
   const handleImagesInput = (id, files, isValid) => {
     if (isValid) {
@@ -83,14 +104,23 @@ const NewPlace = () => {
           errorText="Please enter a valid description (at least 5 characters)."
           onInput={inputHandler}
         />
-        <Input
+        <div className="form-control">
+          <label htmlFor="address">Address</label>
+          <input
+            id="address"
+            type="text"
+            ref={addressInputRef}
+            placeholder="Search for a location"
+          />
+        </div>
+        {/* <Input
           id="address"
           element="input"
           label="Address"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
           onInput={inputHandler}
-        />
+        /> */}
         <ImageUpload place multiple id="images" onInput={handleImagesInput} />
         <Button type="submit" disabled={!formState.isValid}>
           ADD PLACE

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './GallerySlider.css';
 
 const GallerySlider = props => {
@@ -6,6 +6,9 @@ const GallerySlider = props => {
   const images = props.images;
   const thumb = props.thumb;
   const dots = props.dots;
+  const autoSlide = props.autoSlide;
+  const overlay = props.overlay;
+  const autoScroll = props.autoScroll;
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -23,22 +26,33 @@ const GallerySlider = props => {
     setCurrentIndex(index);
   };
 
+  useEffect(() => {
+    if(!autoSlide || images.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [autoSlide, images.length])
+
   return (
-    <div className={`gallery-slider ${thumb ? 'thumbnails' : ''}`}>
-      <div onClick={handlePrev} className="slider-button prev-button"></div>
-      <div className="slider-image-container">
+    <div className={`gallery-slider ${thumb ? 'thumbnails' : ''} ${autoScroll ? 'scroll' : ''}`}>
+      {!autoScroll && <div onClick={handlePrev} className="slider-button prev-button"></div>}
+      <div className={`slider-image-container`}>
         {images?.map((image, index) => (
-          <img
-            key={index}
+          <div key={index} className={`slider-image ${index === currentIndex ? 'active' : ''} ${overlay ? 'image-overlay' : ''}`}>
+            <img
             src={props.ext ? image:`${process.env.REACT_APP_ASSETS_URL}${image}`}
             alt="gallery slide"
-            className={`slider-image ${index === currentIndex ? 'active' : ''}`}
-          />
+          /></div>
         ))}
       </div>
-      <div onClick={handleNext} className="slider-button next-button"></div>
+      {!autoScroll && <div onClick={handleNext} className="slider-button next-button"></div>}
 
-      {dots &&<div className="slider-dots">
+      {dots && !autoScroll && <div className="slider-dots">
         {images.map((_, index) => (
           <span
             key={index}

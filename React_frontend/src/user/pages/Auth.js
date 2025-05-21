@@ -137,7 +137,7 @@ const Auth = () => {
                     errorText="Please enter a valid password (at least 8 characters)."
                     onInput={inputHandler}
                     />
-                    {isLogin && <div class="auth__remember-forgot flex">
+                    {isLogin && <div className="auth__remember-forgot flex">
                         <label><input type="checkbox"/>Remember me</label>
                         <a href="#password">Forgot Password?</a>
                     </div>}
@@ -152,7 +152,7 @@ const Auth = () => {
                         onInput={inputHandler}
                         />
                     )}
-                    {!isLogin && <div class="auth__remember-forgot flex">
+                    {!isLogin && <div className="auth__remember-forgot flex">
                         <label><input type="checkbox" />I agree to the terms & conditions</label>
                     </div>}
                     <Button type="submit" size="full" disabled={!formState.isValid}>{isLogin ? "LOGIN" : "SIGNUP"}</Button>

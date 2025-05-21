@@ -18,6 +18,7 @@ import Contact from './user/pages/Contact';
 import Privacy from './user/pages/Privacy';
 import Terms from './user/pages/Terms';
 import AllPlaces from './places/pages/AllPlaces';
+import SocialIcons from './shared/components/Navigation/SocialIcons';
 
 const Homepage = React.lazy(() => import('./user/pages/Homepage'));
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
@@ -105,6 +106,7 @@ const App = () => {
     <AuthContext.Provider value={{isLoggedIn: !!token, token: token, userId: userId, login: login, logout: logout}}>
       <Router>
         <MainNavigation />
+        <SocialIcons />
         <main>
           <Suspense fallback={
             <div className='center'>

@@ -56,7 +56,7 @@ const ImageUpload = props => {
             props.onInput(
                 props.id, 
                 props.multiple ? compressedFiles : compressedFiles[0], 
-                fileIsValid 
+                fileIsValid
             );
         } catch (error) {
             console.error('Image compression error:', error);

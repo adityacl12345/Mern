@@ -12,6 +12,8 @@ import { AuthContext } from "../../context/auth-context";
 import Avatar from "../UIElements/Avatar";
 import NavDropDown from "./NavDropDown";
 import SearchBar from "../FormElements/SearchBar";
+import LoadingSpinner from "../UIElements/LoadingSpinner";
+import ErrorModal from "../UIElements/ErrorModal";
 
 
 const MainNavigation = props => {
@@ -58,6 +60,8 @@ const MainNavigation = props => {
     };
     return (
         <React.Fragment>
+            {isLoading && <div className="center"><LoadingSpinner /></div>}
+            <ErrorModal error={error} onClear={clearError} />
             {drawerIsOpen && <Backdrop onClick={closeDrawer}/>}
             <SideDrawer show={drawerIsOpen} onClick={closeDrawer}>
                 <nav className="main-navigation__drawer-nav">

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
     "aos": "^3.0.0-beta.6",
     "browser-image-compression": "^2.0.2",
     "react": "^16.11.0",
@@ -10,6 +11,7 @@
     "react-router-dom": "5.3.4",
     "react-scripts": "^5.0.1",
     "react-transition-group": "^4.4.5",
+    "react-typed": "^2.0.12",
     "swiper": "^11.2.6"
   },
   "scripts": {
@@ -37,7 +39,6 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@types/react-router-dom": "^5.3.3",
-    "@types/react-transition-group": "^4.4.10",
-    "@types/swiper": "^6.0.0"
+    "@types/react-transition-group": "^4.4.10"
   }
 }

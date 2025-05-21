@@ -23,10 +23,11 @@ const ItemCarousel = ({ items }) => {
         }}
         pagination={{
             clickable: true,
+            dynamicBullets: true
         }}
         initialSlide={1}
         modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
+        className="carousel-swiper"
     >
       {items.map((item, index) => (
         <SwiperSlide key={index}>{item}</SwiperSlide>

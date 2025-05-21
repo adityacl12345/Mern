@@ -1,3 +1,7 @@
+.homepage-swiper {
+  height: 100vh;
+}
+
 section {
   left: 0;
   right: 0;
@@ -35,6 +39,15 @@ section.Head-gallery {
   max-width: 2560px;
   width: 100%;
 }
+section.Head-gallery .bottom-overlay{
+  width: 100%;
+  position: absolute;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  backdrop-filter: blur(1px);
+  z-index: 3;
+  bottom: 0;
+}
 section.Head-gallery .slider-image-container {
   height: 100vh;
 }
@@ -46,38 +59,64 @@ section.About p {
   color: azure;
   width: 600px;
   text-align: justify;
+  padding: 20px;
 }
 section.About .image-content {
   width: 300px;
   height: 300px;
   border: 1px solid black;
-  margin: 1rem 4rem;
+  margin: 40px;
   background: url(../../assets/CholBro_black.png) no-repeat top/contain;
 }
 
 .caption {
   font-family: partyFont;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  left: 10vw;
+  top: 30vh;
   width: fit-content;
   height: fit-content;
   font-size: 40px;
   white-space: pre-wrap;
   overflow: hidden;
-  text-align: center;
+  text-align: left;
   padding: 20px;
   border-radius: 10px;
-  background-color: rgba(0,0,0,0.5);
+  background: linear-gradient(to right, black 50%, transparent 100%);
+  backdrop-filter: blur(2px);
   color: azure;
+  border-left: .15em solid orange;
 }
+.caption .typing-text {
+  --d: 3.5s;
+  font-size: 35px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .1em;
+  animation: typing var(--d) steps(50, end);
+}
+
 .caption .button {
   font-size: 22px;
 }
 
+section.testimonials .main-content::before {
+  content: '❝';
+  font-size: 150px;
+  position: absolute;
+  top: 100px;
+  color: azure;
+  left: 10vw;
+}
+section.testimonials .main-content::after {
+  content: '❞';
+  font-size: 150px;
+  position: absolute;
+  bottom: -150px;
+  color: azure;
+  right: 10vw;
+}
 .testimonial-grid {
   display: flex;
   justify-content: center;
@@ -111,6 +150,20 @@ section.About .image-content {
   z-index: 10;
 }
 
+section.community .community-links {
+  width: 600px;
+  padding: 0 1rem;
+  margin: 0 20px;
+}
+section.community .community-links p {
+  color: azure;
+  text-align: justify;
+}
+
+section.community .social-icons {
+  justify-content: space-between;
+}
+
 section.community .social-icons img {
   width: 50px;
   height: 50px;
@@ -135,6 +188,15 @@ section.community .social-icons img {
     transform: translateX(30px);
   }
 }
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
 
 @media screen and (min-width: 768px) {
   section.community .social-icons img {
@@ -142,12 +204,25 @@ section.community .social-icons img {
     height: 80px;
     margin: 3rem;
   }
+  .caption .typing-text  {
+    font-size: 55px;
+  }
 }
 
 @media screen and (min-width: 992px) {
   section {
     margin: 0 auto;
     margin-bottom: 40px;
+  }
+  section.testimonials .main-content::before {
+    font-size: 300px;
+    top: 0;
+    left: 20vw;
+  }
+  section.testimonials .main-content::after {
+    font-size: 300px;
+    bottom: -300px;
+    right: 20vw;
   }
 }
 
