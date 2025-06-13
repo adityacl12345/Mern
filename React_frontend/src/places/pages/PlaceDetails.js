@@ -4,35 +4,30 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import { useForm } from "../../shared/hooks/form-hook";
-import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import { VALIDATOR_MINLENGTH } from "../../shared/util/validators";
 import Card from "../../shared/components/UIElements/Card";
+import EmojiPickerComponent from "../../shared/components/FormElements/EmojiPicker";
 
 import "./PlaceDetails.css";
 import GallerySlider from "../../shared/components/UIElements/GallerySlider";
 import CommentItem from "../components/CommentItem";
 import StarSelector from "../../shared/components/UIElements/StarSelector";
 import AverageRating from "../../shared/components/UIElements/AverageRating";
+import ControlledInput from "../../shared/components/FormElements/ControlledInput";
 
 const PlaceDetails = () => {
     const auth = useContext(AuthContext);
     const { pid } = useParams(); // Get the place ID from the URL
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [placeDetails, setPlaceDetails] = useState(null);
+    const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [openRep, setOpenRep] = useState(null);
     const [replyText, setReplyText] = useState({});
     const [rating, setRating] = useState(0);
-    const [formState, inputHandler] = useForm(
-        {
-          text: {
-            value: "",
-            isValid: false
-          }
-        }, false
-    );
+    
     useEffect(() => {
         if (comments.length === 0) return;
       
@@ -80,10 +75,12 @@ const PlaceDetails = () => {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ placeId: pid, userId: auth.userId, text: formState.inputs.text.value }),
+                body: JSON.stringify({ placeId: pid, userId: auth.userId, text: comment }),
             });
             const data = await response.json();
             setComments((prevcomments) => [ ...prevcomments, data.comment]);
+            setComment("");
+            setShowEmojiPicker((prev) => !prev)
         } catch(err) {
             console.log(err);
         }
@@ -170,8 +167,8 @@ const PlaceDetails = () => {
         }
     };
 
-    const handleRepBox = (openReplyBox) => {
-        setOpenRep(openReplyBox);
+    const toggleReplyBox = (commentId) => {
+        setOpenRep(prevId => (prevId === commentId ? null : commentId));
     };
 
     if (!placeDetails) {
@@ -206,7 +203,8 @@ const PlaceDetails = () => {
                                     comment={comment}
                                     userId={auth.userId}
                                     onDel={handleDelete}
-                                    onRep={handleRepBox}
+                                    isReplyBoxOpen={openRep === comment._id}
+                                    onToggleReply={() => toggleReplyBox(comment._id)}
                                 />
                                 <ul className="reply-list">
                                     {comment.replies?.map((r, i) => (
@@ -243,15 +241,24 @@ const PlaceDetails = () => {
                     </div>
                     {auth.isLoggedIn && <div className="comment-section">
                         <form className='comment-form' onSubmit={handleSubmit}>
-                            <Input
-                            id="text"
+                            <ControlledInput
+                            id="comment"
                             element="textarea"
+                            value={comment}
                             placeholder="Add your comment.."
                             validators={[VALIDATOR_MINLENGTH(3)]}
                             errorText="Please enter a valid comment."
-                            onInput={inputHandler}
+                            onChange={(id, val) => setComment(val)}
                             />
-                            <Button type="submit" disabled={!formState.isValid}>Post Comment</Button>
+                            <div className="emoji-panel">
+                                <button type="button" onClick={() => setShowEmojiPicker((prev) => !prev)}>😊</button>
+                                {showEmojiPicker && (
+                                    <EmojiPickerComponent
+                                    onEmojiClick={({ emoji }) => setComment(prev => prev + emoji)}
+                                    />
+                                )}
+                            </div>
+                            <Button type="submit" disabled={comment.trim().length < 3}>Post Comment</Button>
                         </form>
                     </div>}
                 </Card>

@@ -19,6 +19,13 @@
     top: 36%;
 }
 
+.emoji-panel {
+  width: max-content;
+  height: max-content;
+  position: relative;
+  top: -39px;
+}
+
 .comments-list .avatar{
     width: 50px;
 }
@@ -45,4 +52,10 @@
 }
 .comments-list .reply-section textarea{
     width: 100%;
+}
+
+@media (max-width: 768px) {
+  .emoji-panel {
+    display: none !important;
+  }
 }

@@ -1,20 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 
-const CommentItem = ({comment, userId, onDel, onRep}) => {
+const CommentItem = ({comment, userId, onDel, isReplyBoxOpen, onToggleReply}) => {
     const auth = useContext(AuthContext);
-    const [openReplyBox, setOpenReplyBox] = useState(null);
     const [likes, setLikes] = useState(comment.likes.length);
     const [likedByUser, setLikedByUser] = useState(comment.likes.includes(userId));
-
-    useEffect(() => {
-        onRep(openReplyBox);
-    }, [onRep, openReplyBox]);
-    
-    const toggleReplyBox = (commentId) => {
-        setOpenReplyBox((prevId) => (prevId === commentId ? null : commentId));
-    };
     
     const toggleLike = async (commentId) => {
         try {
@@ -50,9 +41,11 @@ const CommentItem = ({comment, userId, onDel, onRep}) => {
                 <br />
                 {comment.text}
                 <div className="comment-actions">
-                    {auth.isLoggedIn && <Button size="small" text onClick={() => toggleReplyBox(comment._id)}>
-                        {openReplyBox === comment._id ? "Cancel" : "Reply"}
-                    </Button>}
+                     {auth.isLoggedIn && (
+                        <Button size="small" text onClick={onToggleReply}>
+                            {isReplyBoxOpen ? "Cancel" : "Reply"}
+                        </Button>
+                    )}
                     {auth.isLoggedIn && auth.userId === comment.userId && <Button size="small" text onClick={() => onDel(comment._id)}>Delete</Button>}
                     {auth.isLoggedIn && <Button size="small" text onClick={() => toggleLike(comment._id)}>
                         <span role="img" aria-label="like">{likedByUser ? '❤️' : '🤍'}{likes}</span>
