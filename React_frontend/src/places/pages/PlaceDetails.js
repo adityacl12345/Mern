@@ -86,7 +86,8 @@ const PlaceDetails = () => {
         }
     };
 
-    const handleReplySubmit = async (commentId) => {
+    const handleReplySubmit = async (commentId, e) => {
+        e.preventDefault(); //
         const reply = replyText[commentId];
         const user = auth.userId;
         if (!reply) return;
@@ -104,7 +105,7 @@ const PlaceDetails = () => {
             // Update replies in state
             setComments((prev) =>
                 prev.map((c) =>
-                c._id === commentId ? { ...c, replies: data.replies } : c
+                    c._id === commentId ? { ...c, replies: data.replies } : c
                 )
             );
     
@@ -223,7 +224,7 @@ const PlaceDetails = () => {
                                     ))}
                                 </ul>
                                 {auth.isLoggedIn && openRep === comment._id && <div className="reply-section">
-                                    <form className='reply-form'>
+                                    <form className='reply-form' onSubmit={(e) => handleReplySubmit(comment._id, e)}>
                                         <textarea
                                         type="text"
                                         rows="3"
@@ -233,7 +234,7 @@ const PlaceDetails = () => {
                                             setReplyText({ ...replyText, [comment._id]: e.target.value })
                                         }
                                         />
-                                        <Button size="small" text onClick={() => handleReplySubmit(comment._id)}>Reply</Button>
+                                        <Button size="small" text type="submit">Reply</Button>
                                     </form>
                                 </div>}
                             </div>
